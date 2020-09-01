@@ -147,7 +147,7 @@ public abstract class MSCWindow {
         if (appRegion().exists(okDialogImage, 3.0d) != null) {
             clickRegion(okButton);
         }
-        Thread.sleep(3000);
+        Thread.sleep(2500);
     }
 
     /**
@@ -193,7 +193,7 @@ public abstract class MSCWindow {
         if ((hwnd == null) || !showWindow(hwnd) || !moveWindow(hwnd) || !setForegroundWindow(hwnd)) {
             throw new PlayException("Unable to find, move, or show the Microsoft Solitaire Collection window.");
         }
-        Thread.sleep(250);
+        Thread.sleep(200);
     }
 
     /**
@@ -239,7 +239,7 @@ public abstract class MSCWindow {
         robot.mouseDown(InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseUp(InputEvent.BUTTON1_DOWN_MASK);
         robot.waitForIdle();
-        Thread.sleep(400);
+        Thread.sleep(300);
     }
 
     /**
