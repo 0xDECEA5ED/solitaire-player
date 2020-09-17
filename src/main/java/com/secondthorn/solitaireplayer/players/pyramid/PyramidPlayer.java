@@ -245,7 +245,7 @@ public class PyramidPlayer extends SolitairePlayer {
         confirmMessage.append(solutionDescription);
         confirmMessage.append("\n");
 
-        if(solutionDescription.contains("No solution found") || (solution != null)){
+        if(solutionDescription.contains("No solution found") || (solution == null)){
             throw new PlayException(solutionDescription);
         } else return solution;
     }
