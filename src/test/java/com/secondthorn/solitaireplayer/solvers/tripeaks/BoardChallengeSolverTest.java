@@ -37,7 +37,7 @@ public class BoardChallengeSolverTest {
         BoardChallengeSolver solver = new BoardChallengeSolver();
         Solution solution = solver.solve(deck, State.INITIAL_STATE);
         assertTrue(solution.isDefinitiveSolution());
-        assertEquals("Lose Quickly: Impossible to clear the board", solution.getDescription());
+        assertEquals("No solution found", solution.getDescription());
         assertEquals(23, solution.getActions().size());
         assertTrue(new PlayTester(deck).areActionsPlayable(solution));
     }
