@@ -223,7 +223,7 @@ public class PyramidPlayer extends SolitairePlayer {
         String solutionDescription;
         switch (solutions.size()) {
             case 0:
-                solutionDescription = "No solution found, so lose quickly to get to the next deal.";
+                solutionDescription = "No solution found";
                 solution = loseQuickly;
                 break;
             case 1:
@@ -245,11 +245,9 @@ public class PyramidPlayer extends SolitairePlayer {
         confirmMessage.append(solutionDescription);
         confirmMessage.append("\n");
 
-        if ((solution != null) && popAsk(confirmMessage.toString(), "Play the solution?")) {
-            return solution;
-        } else {
-            throw new PlayException("User cancelled selecting and playing a solution.");
-        }
+        if(solutionDescription.contains("No solution found") || (solution != null)){
+            throw new PlayException(solutionDescription);
+        } else return solution;
     }
 
     /**

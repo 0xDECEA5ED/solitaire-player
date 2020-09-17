@@ -98,10 +98,8 @@ public class TriPeaksPlayer extends SolitairePlayer {
             }
         }
         printSolution(solution);
-        String confirmMessage = String.format("Press Yes to play or No to quit.\nSolution: %s\n",
-                solution.getDescription());
-        if (!popAsk(confirmMessage, "Play the solution?")) {
-            throw new PlayException("User cancelled selecting and playing a solution.");
+        if(solution.getDescription().contains("No solution found")){
+            throw new PlayException(solution.getDescription());
         }
         window.undoBoard();
         playSolution(solution, window);
