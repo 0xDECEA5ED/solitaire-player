@@ -1,7 +1,11 @@
 /.gradle
 /build/
 .idea/
+.settings/
+.project
+.classpath
 __pycache__/
 *.iml
 /out/
 *.class
+/bin/
