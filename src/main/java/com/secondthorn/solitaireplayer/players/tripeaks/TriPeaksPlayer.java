@@ -26,13 +26,13 @@ public class TriPeaksPlayer extends SolitairePlayer {
     private TriPeaksSolver solver;
 
     public TriPeaksPlayer(String[] args) {
-        String challenge = args.length > 0 ? args[0] : "Board";
-        switch (challenge) {
-            case "Board":
+        String challenge = args.length > 0 ? args[0] : "board";
+        switch (challenge.toLowerCase()) {
+            case "board":
                 solver = new BoardChallengeSolver();
                 System.out.println("Starting a TriPeaks Solitaire Board Challenge...");
                 break;
-            case "Score":
+            case "score":
                 int goalScore = (args.length > 1) ? parseInt(args[1]) : ScoreChallengeSolver.MAX_POSSIBLE_SCORE;
                 int currentScore = (args.length > 2) ? parseInt(args[2]) : 0;
                 solver = new ScoreChallengeSolver(goalScore, currentScore);
@@ -43,7 +43,7 @@ public class TriPeaksPlayer extends SolitairePlayer {
                     System.out.println("go from " + currentScore + " to " + goalScore + " points...");
                 }
                 break;
-            case "Card":
+            case "card":
                 if (args.length != 4) {
                     throw new IllegalArgumentException("Wrong number of args for TriPeaks Solitaire Card Challenge");
                 }
@@ -98,8 +98,10 @@ public class TriPeaksPlayer extends SolitairePlayer {
             }
         }
         printSolution(solution);
-        if(solution.getDescription().contains("No solution found")){
-            throw new PlayException(solution.getDescription());
+        String confirmMessage = String.format("Press Yes to play or No to quit.\nSolution: %s\n",
+                solution.getDescription());
+        if (showPrompts && !popAsk(confirmMessage, "Play the solution?")) {
+            throw new PlayException("User cancelled selecting and playing a solution.");
         }
         window.undoBoard();
         playSolution(solution, window);

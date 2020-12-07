@@ -17,12 +17,12 @@ import static org.sikuli.script.Sikulix.inputText;
 public class FreeCellPlayer extends SolitairePlayer {
 
     public FreeCellPlayer(String[] args) {
-        String goalType = args.length > 0 ? args[0] : "Board";
-        switch (goalType) {
-            case "Board":
+        String goalType = args.length > 0 ? args[0] : "board";
+        switch (goalType.toLowerCase()) {
+            case "board":
                 break;
-            case "Score":
-            case "Card":
+            case "score":
+            case "card":
                 throw new IllegalArgumentException("Score and Card challenges aren't implemented yet.");
             default:
                 throw new IllegalArgumentException("Unknown goal for FreeCell Solitaire: " + goalType);
@@ -43,7 +43,13 @@ public class FreeCellPlayer extends SolitairePlayer {
         List<String> cards = scanCardsOnScreen(window);
         cards = verifyCards(cards);
         String message = "Copy the deck into https://fc-solve.shlomifish.org/js-fc-solve/text/ for the solution";
-        String solutionText = inputText(message, "Deck in fc-solve format", 8, 120, cardsToFCSolveString(cards));
+        String fcDeck = cardsToFCSolveString(cards);
+        if (showPrompts) {
+            String solutionText = inputText(message, "Deck in fc-solve format", 8, 120, fcDeck);
+        } else {
+            System.out.println("Deck in fc-solve format:");
+            System.out.println(fcDeck);
+        }
     }
 
     /**
